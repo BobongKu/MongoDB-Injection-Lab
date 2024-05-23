@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>로그인</h1>
+        <form id="loginForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label for="url">URL 선택:</label>
+            <select id="url" name="url">
+                <option value="/postlogin">POST 로그인</option>
+                <option value="/getlogin">GET 로그인</option>
+                <option value="/getwherelogin">GET $where 로그인</option>
+                <option value="/postwherelogin">POST $where 로그인</option>
+            </select>
+            <button type="button" onclick="submitForm()">로그인</button>
+        </form>
+        <p id="result"></p>
+    </div>
+    <script>
+        async function submitForm() {
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+            const url = document.getElementById('url').value;
+
+            let response;
+            if (url === '/postlogin' || url === '/postuser') {
+                response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, password })
+                });
+            } else {
+                const params = new URLSearchParams({ name, password });
+                response = await fetch(`${url}?${params}`);
+            }
+
+            const result = await response.text();
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
