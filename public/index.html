@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -59,20 +59,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>로그인</h1>
+        <h1>Login</h1>
         <form id="loginForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <label for="url">URL 선택:</label>
+            <label for="url">URL Selection:</label>
             <select id="url" name="url">
-                <option value="/postlogin">POST 로그인</option>
-                <option value="/getlogin">GET 로그인</option>
-                <option value="/getwherelogin">GET $where 로그인</option>
-                <option value="/postwherelogin">POST $where 로그인</option>
+                <option value="/postlogin">POST Login</option>
+                <option value="/getlogin">GET Login</option>
+                <option value="/getwherelogin">GET $where Login</option>
+                <option value="/postwherelogin">POST $where Login</option>
             </select>
-            <button type="button" onclick="submitForm()">로그인</button>
+            <button type="button" onclick="submitForm()">Login</button>
         </form>
         <p id="result"></p>
     </div>

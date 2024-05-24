@@ -1,6 +1,5 @@
 FROM mongo
 
-COPY init.json /docker-entrypoint-initdb.d/init.json
-COPY init-mongo.sh /docker-entrypoint-initdb.d/init-mongo.sh
+COPY ./init.json /init.json
 
-RUN chmod +x /docker-entrypoint-initdb.d/init-mongo.sh 
+CMD mongoimport --host mongodb --collection user --type json --file /init.json --jsonArray

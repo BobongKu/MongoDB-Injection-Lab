@@ -2,14 +2,21 @@ version: '3.7'
 
 services:
   mongodb:
-    build:
-      context: ./mongodb
-      dockerfile: Dockerfile
-    container_name: my-mongodb
+    image: mongo
+    container_name: mongodb
     ports:
       - "27017:27017"
     volumes:
-      - mongodb-data:/data/db
+      - ./mongodb/data:/data/db
+    networks:
+      - app-network
+
+  mongodb-seed:
+    build: ./mongodb
+    container_name: mongo-seed
+    depends_on:
+      - mongodb
+    command: mongoimport --host mongodb --collection user --type json --file /init.json --jsonArray
     networks:
       - app-network
 
@@ -17,7 +24,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: my-node-app
+    container_name: node-app
     ports:
       - "3000:3000"
     depends_on:
