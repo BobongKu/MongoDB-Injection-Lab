@@ -13,7 +13,9 @@ front-end는 express로 구성되어 있습니다.
 
 If you want to view a MongoDB database, you would use the following commands 
 `docker exec -it mongodb /bin/bash`
+
 `mongosh`
+
 `db.user.find({})`
 
 ## Reference
