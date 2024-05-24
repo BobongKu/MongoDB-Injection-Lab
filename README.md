@@ -12,11 +12,9 @@ front-end는 express로 구성되어 있습니다.
 5. start on [http://localhost:3000](http://localhost:3000)
 
 If you want to view a MongoDB database, you would use the following commands 
-`docker exec -it mongodb /bin/bash`
-
-`mongosh`
-
-`db.user.find({})`
+1.`docker exec -it mongodb /bin/bash`
+2.`mongosh`
+3.`db.user.find({})`
 
 ## Reference
 
