@@ -6,13 +6,11 @@ services:
     container_name: mongodb
     ports:
       - "27017:27017"
-    volumes:
-      - ./mongodb/data:/data/db
     networks:
       - app-network
 
   mongodb-seed:
-    build: ./mongodb
+    build: ./mongo-seed
     container_name: mongo-seed
     depends_on:
       - mongodb
@@ -21,10 +19,8 @@ services:
       - app-network
 
   nodejs:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: node-app
+    build: ./express
+    container_name: express
     ports:
       - "3000:3000"
     depends_on:
